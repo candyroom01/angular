@@ -1,6 +1,6 @@
 Implementing services using Dependency Injection in Angular.
 
-Create two components with the names
+SCreate two components with the names
 •	angular--> ng g component angular
 •	Java script--> ng g component javascript
 
