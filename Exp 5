@@ -11,7 +11,7 @@ constroutes: Routes = [];
   exports: [RouterModule]
 })
 exportclassAppRoutingModule { }
-
+-----------------------------------------------------------------------------------------------
 '''app.component.html'''
 <h1>{{ title }}</h1>
 <div><inputtype="text"placeholder="Enter New Task"#task/>
@@ -24,7 +24,7 @@ exportclassAppRoutingModule { }
     
  <li>{{item.id+1}}  {{ item.name }}<button(click)="removeTask(item.id)">Remove</button></li>
 </ol>
-
+-------------------------------------------------------------------------------------------------
 '''app.component.css'''
 h1 {
     font-size: 24px;
@@ -87,7 +87,7 @@ h1 {
   libutton:hover {
     background-color: #cc0000;
   }
-
+-------------------------------------------------------------------------------------------------
 '''app.component.ts'''
 import { Component } from'@angular/core';
 
