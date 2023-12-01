@@ -1,0 +1,82 @@
+Step1 - Create a project folder and in terminal type 
+ng g s fetch-data
+
+Now two folders would be visible
+----------------------------------------------------------------------------------
+Step-2 - Go to fetch-data.service.ts
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http'
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class FetchDataService {
+
+  constructor(private http: HttpClient) { }
+  getUser():Observable<any> {
+    return this.http.get("https://jsonplaceholder.typicode.com/users");
+  }
+  
+}
+----------------------------------------------------------------------------------------------------
+Step-3 - Go to app.component.ts
+import { Component } from '@angular/core';
+import { FetchDataService } from './fetch-data.service';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'exp8';
+  userList: any[] = [];
+  constructor(private fetchService: FetchDataService) {}
+  ngOnInit(): void {
+    this.fetchService.getUser().subscribe(user=>this.userList=user);
+  }
+}
+------------------------------------------------------------------------------------------------------
+Step-4: Go to app.component.html
+
+<table style="margin: 0 auto; border: 1px black solid;">
+  <thead>
+  <th style="border: 1px black solid; padding: 15px;">Name</th>
+  <th style="border: 1px black solid; padding: 15px;">Id</th>
+  <th style="border: 1px black solid; padding: 15px;">Email</th>
+  <th style="border: 1px black solid; padding: 15px;">Street</th>
+  </thead>
+  <tr *ngFor="let user of userList">
+  <td style="border: 1px black solid; padding: 15px;">{{user.name}}</td>
+  <td style="border: 1px black solid; padding: 15px;">{{user.id}}</td>
+  <td style="border: 1px black solid; padding: 15px;">{{user.email}}</td>
+  <td style="border: 1px black solid; padding: 25px;">{{user.address.street}}</td>
+  </tr>
+</table>
+
+-------------------------------------------------------------------------------------------------------------
+Step-5: Go to app.module.ts
+
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+---------------------------------------------------------------------------------------------
+Step-6: ng s and we get output in form of a table
